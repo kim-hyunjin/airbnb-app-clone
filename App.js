@@ -4,6 +4,9 @@ import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
+import Gate from "./components/Gate";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const cacheImages = (images) => {
   return images.map((image) => {
@@ -32,12 +35,13 @@ export default function App() {
     const fonts = [Ionicons.font];
     const imagePromises = cacheImages(images);
     const fontPromises = cacheFonts(fonts);
-    console.log(...fontPromises, ...imagePromises);
     return Promise.all([...fontPromises, ...imagePromises]);
   };
 
   return isReady ? (
-    <Text>I'm Ready</Text>
+    <Provider store={store}>
+      <Gate />
+    </Provider>
   ) : (
     <AppLoading
       onError={console.warn}
