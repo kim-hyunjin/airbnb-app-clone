@@ -7,6 +7,8 @@ import * as Font from "expo-font";
 import Gate from "./components/Gate";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistedStore } from "./redux/store";
 
 const cacheImages = (images) => {
   return images.map((image) => {
@@ -40,7 +42,9 @@ export default function App() {
 
   return isReady ? (
     <Provider store={store}>
-      <Gate />
+      <PersistGate persistor={persistedStore}>
+        <Gate />
+      </PersistGate>
     </Provider>
   ) : (
     <AppLoading
