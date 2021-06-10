@@ -25,7 +25,15 @@ export default () => (
         },
       }}
     />
-    <Auth.Screen name="SignIn" component={SignIn} />
-    <Auth.Screen name="SignUp" component={SignUp} />
+    <Auth.Screen
+      name="SignIn"
+      component={SignIn}
+      options={{ title: "Sign In" }}
+    />
+    <Auth.Screen
+      name="SignUp"
+      component={SignUp}
+      options={{ title: "Sign Up" }}
+    />
   </Auth.Navigator>
 );
