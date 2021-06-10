@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 

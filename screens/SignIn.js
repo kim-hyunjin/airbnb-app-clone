@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import Btn from "../components/Auth/Btn";
 import Input from "../components/Auth/Input";
-import {
-  StatusBar,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
+import { StatusBar, KeyboardAvoidingView } from "react-native";
 import DismissKeyboard from "../components/DismissKeyboard";
 
 const Container = styled.View`
@@ -24,7 +19,6 @@ export default () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = () => alert(`${username}${password}`);
-  const dismissKeyboard = () => Keyboard.dismiss();
   return (
     <DismissKeyboard>
       <Container>
