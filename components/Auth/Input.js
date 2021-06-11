@@ -21,8 +21,10 @@ const Input = ({
   isPassword = false,
   autoCapitalize,
   stateFn,
+  keyboardType,
 }) => (
   <Container
+    keyboardType={keyboardType}
     value={value}
     placeholder={placeholder}
     secureTextEntry={isPassword ? true : false}
