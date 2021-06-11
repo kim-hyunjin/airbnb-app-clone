@@ -1,4 +1,4 @@
-Using EXPO, React Native create airbnb app
+Create airbnb app using EXPO, React Native 
 
 # Requirements
 - node
