@@ -1,13 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import Explore from "../screens/Main/Explore";
+import ExploreContainer from "../screens/Main/Explore/index";
 import Saved from "../screens/Main/Saved";
 import MapScreen from "../screens/Main/Map";
 import Profile from "../screens/Main/Profile";
 import colors from "../colors";
 import utils from "../utils";
-import { View } from "react-native";
 
 const Main = createBottomTabNavigator();
 
@@ -46,7 +45,7 @@ export default () => (
       },
     })}
   >
-    <Main.Screen name="Explore" component={Explore}></Main.Screen>
+    <Main.Screen name="Explore" component={ExploreContainer}></Main.Screen>
     <Main.Screen name="Saved" component={Saved}></Main.Screen>
     <Main.Screen name="Map" component={MapScreen}></Main.Screen>
     <Main.Screen name="Profile" component={Profile}></Main.Screen>

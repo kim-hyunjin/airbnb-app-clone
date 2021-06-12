@@ -9,8 +9,11 @@ const Container = styled.View`
 
 const Text = styled.Text``;
 
-export default () => (
-  <Container>
-    <Text>Explore</Text>
-  </Container>
-);
+export default ({ rooms }) => {
+  console.log(rooms);
+  return (
+    <Container>
+      <Text>Explore</Text>
+    </Container>
+  );
+};
