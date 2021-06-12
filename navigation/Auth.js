@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Welcome from "../screens/Welcome";
-import SignIn from "../screens/SignIn";
-import SignUp from "../screens/SignUp";
+import SignInContainer from "../screens/Auth//SignIn/index";
+import SignUpContainer from "../screens/Auth/SignUp/index";
 import BackBtn from "../components/Auth/BackBtn";
 
 const Auth = createStackNavigator();
@@ -27,12 +27,12 @@ export default () => (
     />
     <Auth.Screen
       name="SignIn"
-      component={SignIn}
+      component={SignInContainer}
       options={{ title: "Sign In" }}
     />
     <Auth.Screen
       name="SignUp"
-      component={SignUp}
+      component={SignUpContainer}
       options={{ title: "Sign Up" }}
     />
   </Auth.Navigator>
