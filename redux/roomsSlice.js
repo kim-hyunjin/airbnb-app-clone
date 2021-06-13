@@ -33,11 +33,11 @@ const roomsSlice = createSlice({
       const room = state.explore.rooms.find((room) => room.id === roomId);
       if (room) {
         if (room.is_fav) {
-          room.is_fav = false;
+          room.is_fav = false; // redux toolkit 덕분에 상태 업데이트가 수월
           state.favs = state.favs.filter((room) => room.id !== roomId);
         } else {
           room.is_fav = true;
-          state.favs.push(room);
+          state.favs = [room, ...state.favs];
         }
       }
     },
