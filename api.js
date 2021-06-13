@@ -2,7 +2,7 @@ import axios from "axios";
 
 const callApi = async (method, path, data, jwt) => {
   const headers = {
-    Authorization: jwt,
+    Authorization: `Bearer ${jwt}`,
     "Content-Type": "application/json",
   };
 
@@ -20,4 +20,6 @@ export default {
   login: (form) => callApi("post", "/users/login/", form),
   rooms: (page = 1) => callApi("get", `/rooms/?page=${page}`),
   favs: (id) => callApi("get", `/users/${id}/favs`),
+  toggleFavs: (userId, roomId, token) =>
+    callApi("put", `/users/${userId}/favs/`, { pk: roomId }, token),
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import ExploreContainer from "../screens/Main/Explore/index";
-import Saved from "../screens/Main/Saved";
+import SavedContainer from "../screens/Main/Saved/index";
 import MapScreen from "../screens/Main/Map";
 import Profile from "../screens/Main/Profile";
 import colors from "../colors";
@@ -46,7 +46,7 @@ export default () => (
     })}
   >
     <Main.Screen name="Explore" component={ExploreContainer}></Main.Screen>
-    <Main.Screen name="Saved" component={Saved}></Main.Screen>
+    <Main.Screen name="Saved" component={SavedContainer}></Main.Screen>
     <Main.Screen name="Map" component={MapScreen}></Main.Screen>
     <Main.Screen name="Profile" component={Profile}></Main.Screen>
   </Main.Navigator>
