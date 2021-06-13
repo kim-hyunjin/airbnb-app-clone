@@ -1,4 +1,5 @@
 import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import ExploreContainer from "../screens/Main/Explore/index";
@@ -7,11 +8,12 @@ import MapScreen from "../screens/Main/Map";
 import Profile from "../screens/Main/Profile";
 import colors from "../colors";
 import utils from "../utils";
+import Room from "../screens/Main/Room";
 
-const Main = createBottomTabNavigator();
+const TabsNavigator = createBottomTabNavigator();
 
-export default () => (
-  <Main.Navigator
+const Tabs = () => (
+  <TabsNavigator.Navigator
     tabBarOptions={{
       activeTintColor: colors.red,
       tabStyle: {
@@ -45,9 +47,33 @@ export default () => (
       },
     })}
   >
-    <Main.Screen name="Explore" component={ExploreContainer}></Main.Screen>
-    <Main.Screen name="Saved" component={SavedContainer}></Main.Screen>
-    <Main.Screen name="Map" component={MapScreen}></Main.Screen>
-    <Main.Screen name="Profile" component={Profile}></Main.Screen>
-  </Main.Navigator>
+    <TabsNavigator.Screen
+      name="Explore"
+      component={ExploreContainer}
+    ></TabsNavigator.Screen>
+    <TabsNavigator.Screen
+      name="Saved"
+      component={SavedContainer}
+    ></TabsNavigator.Screen>
+    <TabsNavigator.Screen
+      name="Map"
+      component={MapScreen}
+    ></TabsNavigator.Screen>
+    <TabsNavigator.Screen
+      name="Profile"
+      component={Profile}
+    ></TabsNavigator.Screen>
+  </TabsNavigator.Navigator>
+);
+
+const MainNavigator = createStackNavigator();
+export default () => (
+  <MainNavigator.Navigator screenOptions={{ headerBackTitleVisible: false }}>
+    <MainNavigator.Screen
+      name="Tabs"
+      component={Tabs}
+      options={{ headerShown: false }}
+    />
+    <MainNavigator.Screen name="RoomDetail" component={Room} />
+  </MainNavigator.Navigator>
 );
