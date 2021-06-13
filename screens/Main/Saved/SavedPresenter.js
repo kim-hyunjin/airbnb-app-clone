@@ -33,6 +33,7 @@ export default ({ rooms }) => (
             id={room.id}
             isFav={true}
             isSuperHost={room.user.superhost}
+            roomObj={room}
           />
         ))
       ) : (
