@@ -31,7 +31,7 @@ export default ({ rooms }) => (
             price={room.price}
             photos={room.photos}
             id={room.id}
-            isFav={room.is_fav}
+            isFav={true}
             isSuperHost={room.user.superhost}
           />
         ))
