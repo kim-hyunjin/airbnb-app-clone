@@ -10,6 +10,8 @@ import colors from "../colors";
 import utils from "../utils";
 import Room from "../screens/Main/Room";
 import BackBtn from "../components/Auth/BackBtn";
+import { BlurView } from "expo-blur";
+import { StyleSheet } from "react-native";
 
 const TabsNavigator = createBottomTabNavigator();
 
@@ -48,22 +50,10 @@ const Tabs = () => (
       },
     })}
   >
-    <TabsNavigator.Screen
-      name="Explore"
-      component={ExploreContainer}
-    ></TabsNavigator.Screen>
-    <TabsNavigator.Screen
-      name="Saved"
-      component={SavedContainer}
-    ></TabsNavigator.Screen>
-    <TabsNavigator.Screen
-      name="Map"
-      component={MapScreen}
-    ></TabsNavigator.Screen>
-    <TabsNavigator.Screen
-      name="Profile"
-      component={Profile}
-    ></TabsNavigator.Screen>
+    <TabsNavigator.Screen name="Explore" component={ExploreContainer} />
+    <TabsNavigator.Screen name="Saved" component={SavedContainer} />
+    <TabsNavigator.Screen name="Map" component={MapScreen} />
+    <TabsNavigator.Screen name="Profile" component={Profile} />
   </TabsNavigator.Navigator>
 );
 
@@ -81,6 +71,19 @@ export default () => (
       component={Tabs}
       options={{ headerShown: false }}
     />
-    <MainNavigator.Screen name="RoomDetail" component={Room} />
+    <MainNavigator.Screen
+      name="RoomDetail"
+      component={Room}
+      options={{
+        headerTransparent: true,
+        headerBackground: () => (
+          <BlurView
+            intensity={100}
+            tint="light"
+            style={StyleSheet.absoluteFill}
+          />
+        ),
+      }}
+    />
   </MainNavigator.Navigator>
 );
