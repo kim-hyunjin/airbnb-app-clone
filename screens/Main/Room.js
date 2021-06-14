@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components/native";
+import { Ionicons } from "@expo/vector-icons";
+import MapView, { Marker } from "react-native-maps";
 import RoomPhotos from "../../components/RoomPhotos";
 import colors from "../../colors";
+import utils from "../../utils";
 
-const Container = styled.View``;
+const Container = styled.ScrollView``;
 
 const DataContainer = styled.View`
   padding: 0px 20px;
@@ -31,12 +34,42 @@ const PropertyInfoText = styled.Text`
   padding: 5px 10px;
 `;
 
+const CheckContainer = styled.View`
+  margin-top: 40px;
+`;
+
+const CheckTitleContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CheckTitle = styled.Text`
+  font-size: 18px;
+  margin-left: 15px;
+`;
+
+const CheckTime = styled.Text`
+  margin-top: 10px;
+`;
+
+const MapContainer = styled.View`
+  width: 100%;
+  height: 200px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
 function formatQtt(number, name) {
   if (number === 1) {
     return `${number} ${name}`;
   } else {
     return `${number} ${name}s`;
   }
+}
+
+function formatTime(time) {
+  const [hours, min, sec] = time.split(":");
+  return `${hours} o'clock.`;
 }
 
 export default ({ route: { params }, navigation }) => {
@@ -47,7 +80,9 @@ export default ({ route: { params }, navigation }) => {
     <Container>
       <RoomPhotos photos={params.photos} factor={2} />
       <DataContainer>
-        <Address>{params.address}</Address>
+        <Address>
+          {params.address} / ${params.price}
+        </Address>
         <PropertyInfoContainer>
           <PropertyInfoData>
             <PropertyInfoText>{formatQtt(params.beds, "bed")}</PropertyInfoText>
@@ -63,6 +98,42 @@ export default ({ route: { params }, navigation }) => {
             </PropertyInfoText>
           </PropertyInfoData>
         </PropertyInfoContainer>
+        <CheckContainer>
+          <CheckTitleContainer>
+            <Ionicons
+              name={utils.isAndroid() ? "md-timer" : "ios-timer"}
+              size={24}
+            />
+            <CheckTitle>Check-in / Check-out</CheckTitle>
+          </CheckTitleContainer>
+          <CheckTime>
+            {formatTime(params.check_in)} / {formatTime(params.check_out)}
+          </CheckTime>
+        </CheckContainer>
+        <MapContainer>
+          <MapView
+            camera={{
+              center: {
+                latitude: parseFloat(params.lat),
+                longitude: parseFloat(params.lng),
+              },
+              altitude: 10 * 200,
+              zoom: 15,
+              pitch: 25,
+              heading: 0,
+            }}
+            zoomEnabled={false}
+            scrollEnabled={true}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <Marker
+              coordinate={{
+                longitude: parseFloat(params.lng),
+                latitude: parseFloat(params.lat),
+              }}
+            />
+          </MapView>
+        </MapContainer>
       </DataContainer>
     </Container>
   );
