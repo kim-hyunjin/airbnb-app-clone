@@ -53,6 +53,7 @@ export const toggleFav = (roomId) => async (dispatch, getState) => {
   dispatch(setFav({ roomId }));
   try {
     const { status } = await api.toggleFavs(id, roomId, token);
+    console.log(status);
   } catch (e) {
     console.warn(e);
   }
