@@ -9,6 +9,7 @@ import Profile from "../screens/Main/Profile";
 import colors from "../colors";
 import utils from "../utils";
 import Room from "../screens/Main/Room";
+import SearchContainer from "../screens/Main/Search/index";
 import BackBtn from "../components/Auth/BackBtn";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
@@ -84,6 +85,11 @@ export default () => (
           />
         ),
       }}
+    />
+    <MainNavigator.Screen
+      name="Search"
+      options={{ headerShown: false }}
+      component={SearchContainer}
     />
   </MainNavigator.Navigator>
 );
