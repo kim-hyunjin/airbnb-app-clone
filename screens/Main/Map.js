@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components/native";
 import { StyleSheet, Dimensions } from "react-native";
 import { connect } from "react-redux";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -55,22 +55,60 @@ const RoomPrice = styled.Text`
 `;
 
 const Map = ({ rooms }) => {
+  const mapRef = useRef();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const onScroll = ({
+    nativeEvent: {
+      contentOffset: { x },
+    },
+  }) => {
+    const position = Math.abs(Math.round(x / width));
+    setCurrentIndex(position);
+  };
+  useEffect(() => {
+    mapRef.current?.animateCamera(
+      {
+        center: {
+          latitude: parseFloat(rooms[currentIndex].lat),
+          longitude: parseFloat(rooms[currentIndex].lng),
+        },
+        altitude: 1000,
+        pitch: 0,
+        heading: 0,
+        zoom: 15,
+      },
+      { duration: 1000 }
+    );
+  }, [currentIndex]);
   return (
     <Container>
       <MapView
+        ref={mapRef}
         style={StyleSheet.absoluteFill}
         camera={{
           center: {
             latitude: parseFloat(rooms[0].lat),
             longitude: parseFloat(rooms[0].lng),
           },
-          altitude: 700,
+          altitude: 1000,
           pitch: 0,
           heading: 0,
           zoom: 15,
         }}
-      />
+      >
+        {rooms?.map((room) => (
+          <Marker
+            key={room.id}
+            coordinate={{
+              latitude: parseFloat(room.lat),
+              longitude: parseFloat(room.lng),
+            }}
+          />
+        ))}
+      </MapView>
       <ScrollView
+        scrollEventThrottle={50}
+        onScroll={onScroll}
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         horizontal
