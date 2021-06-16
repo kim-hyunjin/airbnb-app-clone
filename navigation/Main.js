@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import ExploreContainer from "../screens/Main/Explore/index";
 import SavedContainer from "../screens/Main/Saved/index";
-import MapScreen from "../screens/Main/Map";
+import MapContainer from "../screens/Main/Map/index";
 import Profile from "../screens/Main/Profile";
 import colors from "../colors";
 import utils from "../utils";
@@ -53,7 +53,7 @@ const Tabs = () => (
   >
     <TabsNavigator.Screen name="Explore" component={ExploreContainer} />
     <TabsNavigator.Screen name="Saved" component={SavedContainer} />
-    <TabsNavigator.Screen name="Map" component={MapScreen} />
+    <TabsNavigator.Screen name="Map" component={MapContainer} />
     <TabsNavigator.Screen name="Profile" component={Profile} />
   </TabsNavigator.Navigator>
 );
